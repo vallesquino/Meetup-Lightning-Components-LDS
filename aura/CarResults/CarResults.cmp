@@ -1,0 +1,53 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" controller="CarController">
+
+    <aura:handler event="c:CarsBrandSelectedEvent" action="{!c.updateList}"/>
+    <!-- init handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute access="private" name="cars" type="Object[]"/>
+    
+    <div class="slds-card slds-m-around--small slds-p-horizontal--medium">
+      <div class="slds-card__header slds-grid">
+        <div class="slds-media slds-media--center slds-has-flexi-truncate">
+          <div class="slds-media__figure">
+              <c:svg xlinkHref="/resource/SLDS0121/assets/icons/custom-sprite/svg/symbols.svg#custom31" ariaHidden="true" class="slds-icon slds-icon-standard-log-a-call slds-icon--small"/>
+          </div>
+          <div class="slds-media__body">
+            <h2 class="slds-text-heading--small slds-truncate">Car Details</h2>
+          </div>
+        </div>
+      </div>
+        
+      <div class="slds-card__body">
+        <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-no-row-hover">
+          <thead>
+            <tr>
+              <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Brand</th>
+              <th class="slds-text-heading--label slds-size--1-of-6" scope="col">License Number</th>
+              <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Fuel</th>
+              <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Color</th>
+              <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Price (€)</th>
+              <th class="slds-text-heading--label slds-size--1-of-6" scope="col">Sold</th>
+            </tr>
+          </thead>
+          <tbody>
+            <aura:iteration items="{!v.cars}" var="car" indexVar="i">
+                <tr class="slds-hint-parent">
+                  <td class="slds-size--1-of-6" data-label="Brand">{!car.c8r__Brand__r.Name}</td>
+                  <td class="slds-size--1-of-6" data-label="License Number">{!car.c8r__LicenseNumber__c}</td>
+                  <td class="slds-size--1-of-6" data-label="Fuel">{!car.c8r__Fuel__c}</td>
+                  <td class="slds-size--1-of-6" data-label="Color">{!car.c8r__Colour__c}</td>
+                  <td class="slds-size--1-of-6" data-label="Price">{!car.c8r__Price__c}</td>
+                  <td class="slds-size--1-of-6 slds-row-select">
+                    <label class="slds-checkbox" for="{!'select-row' + i}">
+                      <input name="{!car.Name}" type="checkbox" id="{!'select-row' + i}" checked = "{!car.c8r__Sold__c}"/>
+                      <span class="slds-checkbox--faux"></span>
+                    </label>
+                  </td>
+                </tr>
+            </aura:iteration>
+          </tbody>
+        </table>
+      </div>
+        
+    </div>
+</aura:component>

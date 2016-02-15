@@ -1,0 +1,41 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" controller="CarController">
+    
+    <aura:registerEvent name="brandSelectedEvent" type="c:CarsBrandSelectedEvent"/>
+    
+    <aura:attribute access="private" name="brands" type="Object[]"/>
+    <!-- init handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="slds-card slds-m-around--small slds-p-horizontal--medium">
+      <div class="slds-card__header slds-grid">
+        <div class="slds-media slds-media--center slds-has-flexi-truncate">
+          <div class="slds-media__figure">
+              <c:svg xlinkHref="/resource/SLDS0121/assets/icons/action-sprite/svg/symbols.svg#filter" ariaHidden="true" class="slds-icon slds-icon-action-filter slds-icon--small"/>
+          </div>
+          <div class="slds-media__body">
+            <h2 class="slds-text-heading--small slds-truncate">Brand Selection</h2>
+          </div>
+        </div>
+      </div>
+        
+      <div class="slds-card__body slds-grid slds-grid--align-spread">
+          
+        <div class="slds-form-element slds-align-bottom slds-col--padded slds-size--5-of-6">
+          <label class="slds-form-element__label" for="selectSample1">Select a brand:</label>
+          <div class="slds-form-element__control">
+            <div class="slds-select_container">
+              <select id="brandSelector" class="slds-select" onchange="{!c.brandChange}">
+                <option disabled="true" selected="true"> -- select a brand -- </option>
+                <aura:iteration items="{!v.brands}" var="brand">
+                    <option value="{!brand.Id}">{!brand.Name}</option>
+                </aura:iteration>
+              </select>
+            </div>
+          </div>
+        </div>
+          
+        <button onclick="{!c.viewAllClick}" class="slds-button slds-button--neutral slds-align-bottom slds-col--padded slds-size--1-of-6">View All</button>
+      </div>
+ 
+    </div>
+</aura:component>
